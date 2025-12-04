@@ -14,7 +14,6 @@ class Category:
         Category.quantity_categories += 1
         Category.quantity_products += len(list_products) if list_products else 0
 
-
 if __name__ == '__main__':
     product_banana = Product(name="Банан", description="жёлтый", price=15.0, quantity=3)
     product_pomidor = Product(name="Помидор", description="азербайджанский", price=3.0, quantity=10)
