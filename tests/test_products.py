@@ -1,7 +1,6 @@
-
 def test_product(sample_product):
-    assert sample_product.name == 'Банан'
-    assert sample_product.description == 'жёлтый'
+    assert sample_product.name == "Банан"
+    assert sample_product.description == "жёлтый"
     assert sample_product.price == 15.0
     assert sample_product.quantity == 10
 
