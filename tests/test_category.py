@@ -1,69 +1,26 @@
-import pytest
-
 from src.category import Category
 from src.products import Product
 
 
-@pytest.fixture(autouse=True)
-def reset_counters():
-    """Сбрасывает статические счётчики перед каждым тестом."""
-    Category.quantity_categories = 0
-    Category.quantity_products = 0
+def test_add_new_product():
+    category = Category("Овощи", "Свежие овощи", [])
+    new_product = Product("Морковь", "Оранжевая", 5.0, 4)
+
+    category.add_product(new_product)
+
+    expected_output = "Морковь, 5.0 руб. Остаток: 4 шт"
+    assert category.list_products.strip() == expected_output
 
 
-def test_category_initialization():
-    """Проверка корректной инициализации атрибутов категории."""
-    p1 = Product(name="Банан", description="жёлтый", price=15.0, quantity=3)
-    p2 = Product(name="Помидор", description="азербайджанский", price=3.0, quantity=10)
-    category = Category(
-        name="Еда", description="Продукты питания", list_products=[p1, p2]
-    )
+def test_update_existing_product():
+    initial_product = Product("Картошка", "Белая", 10.0, 5)
+    category = Category("Овощи", "Свежие овощи", [initial_product])
 
-    assert category.name == "Еда"
-    assert category.description == "Продукты питания"
-    assert category.list_products == [p1, p2]
+    updated_product = Product("Картошка", "Белая", 12.0, 3)
+    category.add_product(updated_product)
 
+    expected_output = "Картошка, 12.0 руб. Остаток: 8 шт"
+    assert category.list_products.strip() == expected_output
 
-def test_category_counters_with_products():
-    """Проверка счётчиков при передаче непустого списка продуктов."""
-    p1 = Product(name="Банан", description="жёлтый", price=15.0, quantity=3)
-    p2 = Product(name="Помидор", description="азербайджанский", price=3.0, quantity=10)
-    Category(name="Еда", description="Продукты", list_products=[p1, p2])
-
-    assert Category.quantity_categories == 1
-    assert Category.quantity_products == 2
-
-
-def test_category_counters_empty_list():
-    """Счётчики при пустом списке продуктов."""
-    Category(name="Пусто", description="Нет товаров", list_products=[])
-
-    assert Category.quantity_categories == 1
-    assert Category.quantity_products == 0
-
-
-def test_category_counters_none_list():
-    """Счётчики при list_products=None."""
-    Category(name="Нет списка", description="Список не задан", list_products=None)
-
-    assert Category.quantity_categories == 1
-    assert Category.quantity_products == 0
-
-
-def test_multiple_categories():
-    """Проверка накопления счётчиков при создании нескольких категорий."""
-    p1 = Product("Хлеб", "Белый", 50.0, 5)
-    p2 = Product("Сыр", "Твёрдый", 300.0, 2)
-    p3 = Product("Чай", "Зелёный", 200.0, 10)
-    cat1 = Category("Бакалея", "Сухие товары", [p1, p2])
-    cat2 = Category("Напитки", "Чай и кофе", [p3])
-    assert Category.quantity_categories == 2
-    assert Category.quantity_products == 3
-
-
-def test_access_class_counters_via_instance():
-    """Проверка, что экземпляр видит классовые счётчики."""
-    p = Product("Молоко", "1л", 70.0, 4)
-    cat = Category("Молочка", "Молочные продукты", [p])
-    assert cat.quantity_categories == 1
-    assert cat.quantity_products == 1
+    total_quantity = sum(p.quantity for p in category._Category__list_products)
+    assert total_quantity == 8

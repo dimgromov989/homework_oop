@@ -40,8 +40,9 @@ def test_create_obj_from_json():
     assert len(categories) == 1
     cat = categories[0]
     assert cat.name == "Бытовая техника"
-    assert len(cat.list_products) == 1
-    product = cat.list_products[0]
-    assert product.name == "Утюг"
-    assert product.price == 2000.0
-    assert product.quantity == 5
+
+    output_lines = cat.list_products.strip().split("\n")
+    assert len(output_lines) == 1
+    assert "Утюг" in output_lines[0]
+    assert "2000.0 руб." in output_lines[0]
+    assert "Остаток: 5 шт" in output_lines[0]
