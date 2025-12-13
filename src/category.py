@@ -31,6 +31,6 @@ class Category:
         str_for_list = ""
         for product in self.__list_products:
             str_for_list += (
-                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт\n"
+                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
             )
         return str_for_list

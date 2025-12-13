@@ -8,8 +8,8 @@ def test_add_new_product():
 
     category.add_product(new_product)
 
-    expected_output = "Морковь, 5.0 руб. Остаток: 4 шт"
-    assert category.list_products.strip() == expected_output
+    expected_output = "Морковь, 5.0 руб. Остаток: 4 шт.\n"
+    assert category.list_products == expected_output
 
 
 def test_update_existing_product():
@@ -19,8 +19,8 @@ def test_update_existing_product():
     updated_product = Product("Картошка", "Белая", 12.0, 3)
     category.add_product(updated_product)
 
-    expected_output = "Картошка, 12.0 руб. Остаток: 8 шт"
-    assert category.list_products.strip() == expected_output
+    expected_output = "Картошка, 12.0 руб. Остаток: 8 шт.\n"
+    assert category.list_products == expected_output
 
     total_quantity = sum(p.quantity for p in category._Category__list_products)
     assert total_quantity == 8
