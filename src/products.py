@@ -9,6 +9,16 @@ class Product:
         self.__price = price
         self.quantity = quantity if quantity else 0
 
+    def __str__(self):
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other):
+        if isinstance(other, Product):
+            total_quantity = (self.quantity * self.__price) + (
+                other.quantity * other.__price
+            )
+            return f"Сумма с учетом количества товаров на складе: {float(total_quantity)} руб."
+
     @classmethod
     def new_product(cls, product_data: dict):
         return cls(
@@ -27,7 +37,6 @@ class Product:
         if value <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
-
         if value < self.__price:
             user_input = (
                 input("Вы действительно хотите понизить цену? (y/n): ").strip().lower()

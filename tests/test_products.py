@@ -93,3 +93,12 @@ def test_new_product_with_missing_quantity():
     }
     product2 = Product.new_product(data2)
     assert product2.quantity == 0
+
+
+def test_product_addition_returns_total_value():
+    product_1 = Product("Плеер", "MP3", 100.0, 2)
+    product_2 = Product("Колонки", "Стерео", 50.0, 1)
+
+    result = product_1 + product_2
+
+    assert result == "Сумма с учетом количества товаров на складе: 250.0 руб."

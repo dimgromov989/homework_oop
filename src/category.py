@@ -16,7 +16,20 @@ class Category:
             product.quantity for product in self.__list_products
         )
 
+    def __str__(self):
+        """Стандартное строковое представление категории (опционально, для print(category1))."""
+        total_quantity = sum(p.quantity for p in self.__list_products)
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
+    @property
+    def list_products(self) -> str:
+        """Возвращает строковое представление всех товаров категории"""
+        return "\n".join(str(product) for product in self.__list_products) + (
+            "\n" if self.__list_products else ""
+        )
+
     def add_product(self, product: Product):
+        """Добавляет товар в список товаров."""
         for item in self.__list_products:
             if item.name.lower() == product.name.lower():
                 item.quantity += product.quantity
@@ -24,13 +37,3 @@ class Category:
                 return
         self.__list_products.append(product)
         Category.quantity_products += product.quantity
-
-    @property
-    def list_products(self):
-        """Геттер для безопасного чтения списка товаров (только для чтения)."""
-        str_for_list = ""
-        for product in self.__list_products:
-            str_for_list += (
-                f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
-            )
-        return str_for_list
