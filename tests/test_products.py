@@ -102,3 +102,9 @@ def test_product_addition_returns_total_value():
     result = product_1 + product_2
 
     assert result == "Сумма с учетом количества товаров на складе: 250.0 руб."
+
+
+def test_product_addition_with_different_types_raises():
+    product = Product("Плеер", "MP3", 100.0, 2)
+    with pytest.raises(TypeError, match="невозможно сложить два объекта разных типов"):
+        _ = product + "not a product"

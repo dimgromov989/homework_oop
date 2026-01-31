@@ -17,7 +17,7 @@ class Category:
         )
 
     def __str__(self):
-        """Стандартное строковое представление категории (опционально, для print(category1))."""
+        """Стандартное строковое представление категории"""
         total_quantity = sum(p.quantity for p in self.__list_products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
@@ -30,10 +30,11 @@ class Category:
 
     def add_product(self, product: Product):
         """Добавляет товар в список товаров."""
-        for item in self.__list_products:
-            if item.name.lower() == product.name.lower():
-                item.quantity += product.quantity
-                item.price = max(item.price, product.price)
-                return
-        self.__list_products.append(product)
-        Category.quantity_products += product.quantity
+        if isinstance(product, Product):
+            for item in self.__list_products:
+                if item.name.lower() == product.name.lower():
+                    item.quantity += product.quantity
+                    item.price = max(item.price, product.price)
+                    return
+            self.__list_products.append(product)
+            Category.quantity_products += product.quantity
