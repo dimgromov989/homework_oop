@@ -1,4 +1,8 @@
-class Product:
+from src.base_product import BaseProduct
+from src.print_mixin import PrintMixin
+
+
+class Product(BaseProduct, PrintMixin):
     name: str
     description: str
     quantity: int
@@ -9,6 +13,7 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity if quantity else 0
+        super().__init__()
 
     def __str__(self):
         """Стандартное строковое представление объекта Product"""
@@ -21,7 +26,10 @@ class Product:
                 total_quantity = (self.quantity * self.__price) + (
                     other.quantity * other.__price
                 )
-                return f"Сумма с учетом количества товаров на складе: {float(total_quantity)} руб."
+                return (
+                    "Сумма с учетом количества товаров на складе: "
+                    f"{float(total_quantity)} руб."
+                )
         raise TypeError("Ошибка: невозможно сложить два объекта разных типов")
 
     @classmethod

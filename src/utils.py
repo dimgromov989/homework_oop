@@ -17,7 +17,8 @@ def create_obj_from_json(data):
     """Создает объекты из данных в json файле."""
     categories = []
     for category in data:
-        products = [Product(**p) for p in category.get("products")]
+        products_data = category.get("products") or []
+        products = [Product.new_product(p) for p in products_data]
         cat_obj = Category(
             name=category["name"],
             description=category["description"],
