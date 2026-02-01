@@ -8,5 +8,3 @@ class PrintMixin:
             f"{self.name}, {self.description}, {self.price}, {self.quantity}"
             ")"
         )
-
-

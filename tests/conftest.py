@@ -14,7 +14,7 @@ def category_food():
     return Category(
         name="Еда",
         description="Продукты питания",
-        list_products=[
+        products=[
             Product(
                 name="Помидор", description="азербайджанский", price=3.0, quantity=10
             ),

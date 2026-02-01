@@ -22,7 +22,7 @@ def create_obj_from_json(data):
         cat_obj = Category(
             name=category["name"],
             description=category["description"],
-            list_products=products,
+            products=products,
         )
         categories.append(cat_obj)
     return categories
