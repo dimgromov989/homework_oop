@@ -2,7 +2,9 @@ from src.products import Product
 
 
 class Smartphone(Product):
-    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+    def __init__(
+        self, name, description, price, quantity, efficiency, model, memory, color
+    ):
         """Инициализация объекта Smartphone"""
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
@@ -22,17 +24,5 @@ if __name__ == "__main__":
     product2 = Product("Товар2", "Описание", 200, 3)
     smartphone = Smartphone("iPhone", "Описание", 1000, 1, "A15", "13", 128, "black")
 
-
     print(product1 + product2)
     print(product1 + smartphone)
-
-
-
-
-
-
-
-
-
-
-

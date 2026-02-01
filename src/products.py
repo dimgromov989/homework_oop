@@ -14,13 +14,12 @@ class Product:
         """Стандартное строковое представление объекта Product"""
         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
 
-
     def __add__(self, other):
         """Сложение двух объектов Product, с учетом типа объектов"""
         if type(self) is type(other):
             if isinstance(other, Product):
                 total_quantity = (self.quantity * self.__price) + (
-                        other.quantity * other.__price
+                    other.quantity * other.__price
                 )
                 return f"Сумма с учетом количества товаров на складе: {float(total_quantity)} руб."
         raise TypeError("Ошибка: невозможно сложить два объекта разных типов")
