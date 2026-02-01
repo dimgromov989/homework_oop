@@ -3,7 +3,14 @@ from src.products import Product
 
 class LawnGrass(Product):
     def __init__(
-        self, name, description, price, quantity, country, germination_period, color
+        self,
+        name,
+        description,
+        price,
+        quantity,
+        country,
+        germination_period,
+        color,
     ):
         """Инициализация объекта LawnGrass"""
         super().__init__(name, description, price, quantity)
@@ -20,9 +27,21 @@ class LawnGrass(Product):
 
 if __name__ == "__main__":
     lawn_grass = LawnGrass(
-        "Lawn Grass", "Lawn grass for lawn", 10, 100, "USA", 30, "green"
+        "Lawn Grass",
+        "Lawn grass for lawn",
+        10,
+        100,
+        "USA",
+        30,
+        "green",
     )
     lawn_grass_1 = LawnGrass(
-        "Lawn Grass", "Lawn grass for lawn", 10, 100, "USA", 30, "green"
+        "Lawn Grass",
+        "Lawn grass for lawn",
+        10,
+        100,
+        "USA",
+        30,
+        "green",
     )
     print(lawn_grass + lawn_grass_1)
