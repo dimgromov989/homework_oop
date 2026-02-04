@@ -12,7 +12,11 @@ class Product(BaseProduct, PrintMixin):
         self.name = name
         self.description = description
         self.__price = price
-        self.quantity = quantity if quantity else 0
+        if quantity is None:
+            quantity = 0
+        if quantity < 0:
+            raise ValueError("Количество товара не может быть отрицательным")
+        self.quantity = quantity
         super().__init__()
 
     def __str__(self):
@@ -35,11 +39,14 @@ class Product(BaseProduct, PrintMixin):
     @classmethod
     def new_product(cls, product_data: dict):
         """Создание нового объекта Product из словаря"""
+        quantity = product_data.get("quantity")
+        if quantity is None:
+            quantity = 0
         return cls(
             product_data.get("name"),
             product_data.get("description"),
             product_data.get("price"),
-            product_data.get("quantity"),
+            quantity,
         )
 
     @property
