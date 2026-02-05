@@ -75,24 +75,15 @@ def test_price_setter_negative_or_zero_price(sample_product, capsys):
     assert sample_product.price == 1000.0
 
 
-def test_new_product_with_missing_quantity():
-    """Тест: если quantity отсутствует или None — должно быть 0."""
-    data = {
-        "name": "Часы",
-        "description": "Механические",
-        "price": 2000.0,
-        "quantity": None,
-    }
-    product = Product.new_product(data)
-    assert product.quantity == 0
-
-    data2 = {
-        "name": "Часы",
-        "description": "Механические",
-        "price": 2000.0,
-    }
-    product2 = Product.new_product(data2)
-    assert product2.quantity == 0
+def test_product_zero_quantity_raises_value_error():
+    """Тест: создание товара с нулевым количеством вызывает ValueError"""
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product(
+            name="Тестовый товар",
+            description="Описание товара",
+            price=100.0,
+            quantity=0
+        )
 
 
 def test_product_addition_returns_total_value():

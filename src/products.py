@@ -12,10 +12,8 @@ class Product(BaseProduct, PrintMixin):
         self.name = name
         self.description = description
         self.__price = price
-        if quantity is None:
-            quantity = 0
-        if quantity < 0:
-            raise ValueError("Количество товара не может быть отрицательным")
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
         self.quantity = quantity
         super().__init__()
 

@@ -46,18 +46,6 @@ def test_add_product_rejects_non_product():
         category.add_product("not a product")
 
 
-def test_add_product_with_non_positive_quantity_prints_error(capsys):
-    category = Category("Овощи", "Свежие овощи", [])
-    invalid_product = Product("Картошка", "Белая", 10.0, 0)
-
-    category.add_product(invalid_product)
-
-    captured = capsys.readouterr()
-    assert "Товар с нулевым количеством не может быть добавлен" in captured.out
-    assert "Операция завершена" in captured.out
-    assert category.products == ""
-
-
 def test_middle_price_returns_average_for_products():
     product_1 = Product("Огурцы", "Свежие", 10.0, 2)
     product_2 = Product("Помидоры", "Сочные", 20.0, 3)
